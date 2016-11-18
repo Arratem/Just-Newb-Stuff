@@ -1,0 +1,82 @@
+using UnityEngine;
+using System.Collections;
+
+public class NumberWizard : MonoBehaviour {
+	
+	int max;
+	int min;
+	int guess;
+
+	// Use this for initialization
+	void Start () {
+			SetupGame();	
+	}
+	
+	void StartGame ()	{
+		min	=	1;
+		guess =	Random.Range (min,max);
+		
+		print ("Good!");	
+		print ("Now pick a number in your head, but don't tell me!");
+		
+		print ("The highest number you can pick is "	+ max);
+		print ("The lowest number you can pick is "	+ min);
+		
+		print ("Is the number higher or lower than " + guess + "?");
+		print ("Up = higher, down = lower, return = equal");
+		
+		max = max + 1;
+		
+	}
+	
+	void SetupGame() {
+		print ("==============================================");
+		print ("Welcome to Number Wizard!");
+		print ("How high should we go?");
+		print ("1 = 1000, 2 = 10,000, 3 = 100,000, 4 = 1,000,000");
+		
+	}
+	
+	
+	// Update is called once per frame
+	void Update () {
+		if (Input.GetKeyDown(KeyCode.UpArrow))	{
+			// print("Up arrow pressed");
+			min = guess;
+			NextGuess();
+		}	else if (Input.GetKeyDown(KeyCode.DownArrow)){
+			// print("Down arrow pressed");
+			max = guess;
+			NextGuess();
+		}	else if (Input.GetKeyDown(KeyCode.Return))	{
+			print ("I won!");
+			SetupGame ();
+		}
+		
+		if (Input.GetKeyDown(KeyCode.Alpha1))	{
+			print ("1 was pressed");
+			max = 1000;
+			StartGame();
+			
+		}	else if (Input.GetKeyDown(KeyCode.Alpha2)){
+			max = 10000;
+			StartGame();
+			
+		}	else if (Input.GetKeyDown(KeyCode.Alpha3))	{
+			max = 100000;
+			StartGame();
+			
+		}	else if (Input.GetKeyDown(KeyCode.Alpha4))	{
+			max = 1000000;
+			StartGame();
+		}
+		
+	}
+	
+	
+	void NextGuess ()	{
+		guess = (max + min) / 2;
+		print ("Higher or lower than " + guess + "?");
+		print ("Up = higher, down = lower, return = equal");
+	}
+}
